@@ -68,6 +68,12 @@ class BluetoothHci : public hal::IBluetoothHci {
     // Send a reset command and discard all packets until a reset is received.
     void reset();
 
+    void sendNOCPHciEvent(const std::vector<uint8_t>& packet);
+
+    void checkLocalLoopbackCmd(const std::vector<uint8_t>& packet);
+
+    bool isLocalLoopbackActive{false};
+
     // Don't close twice or open before close is complete
     std::mutex mStateMutex;
     enum class HalState {
