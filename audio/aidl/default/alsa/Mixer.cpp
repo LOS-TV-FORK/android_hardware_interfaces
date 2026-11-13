@@ -48,7 +48,9 @@ const std::map<Mixer::Control, std::vector<Mixer::ControlNamesAndExpectedCtlType
                 {Mixer::HW_VOLUME,
                  {{"Headphone Playback Volume", MIXER_CTL_TYPE_INT},
                   {"Headset Playback Volume", MIXER_CTL_TYPE_INT},
-                  {"PCM Playback Volume", MIXER_CTL_TYPE_INT}}},
+                  {"PCM Playback Volume", MIXER_CTL_TYPE_INT},
+                  {"Speaker Playback Volume", MIXER_CTL_TYPE_INT},
+                  {"Speaker Volume", MIXER_CTL_TYPE_INT}}},
                 {Mixer::MIC_SWITCH, {{"Capture Switch", MIXER_CTL_TYPE_BOOL}}},
                 {Mixer::MIC_GAIN, {{"Capture Volume", MIXER_CTL_TYPE_INT}}}};
 

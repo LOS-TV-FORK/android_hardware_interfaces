@@ -96,6 +96,17 @@ StreamOutUsb::StreamOutUsb(StreamContext&& context, const SourceMetadata& source
       StreamUsb(&mContextInstance, sourceMetadata),
       StreamOutHwVolumeHelper(&mContextInstance) {}
 
+ndk::ScopedAStatus StreamOutUsb::getCapabilities(
+        std::vector<AudioCapability>* _aidl_return) {
+    for (const auto& profile : getDeviceProfiles()) {
+        if (usb::UsbAlsaMixerControl::getInstance().hasHwVolumeControl(profile.card)) {
+            _aidl_return->push_back(AudioCapability::AUDIO_CAPABILITY_VOLUME);
+            break;
+        }
+    }
+    return ndk::ScopedAStatus::ok();
+}
+
 ndk::ScopedAStatus StreamOutUsb::getHwVolume(std::vector<float>* _aidl_return) {
     return getHwVolumeImpl(_aidl_return);
 }

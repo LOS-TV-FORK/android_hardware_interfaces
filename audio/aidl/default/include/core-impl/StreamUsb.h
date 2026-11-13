@@ -70,6 +70,7 @@ class StreamOutUsb final : public StreamOut, public StreamUsb, public StreamOutH
 
   private:
     void onClose(StreamDescriptor::State) override { defaultOnClose(); }
+    ndk::ScopedAStatus getCapabilities(std::vector<AudioCapability>* _aidl_return) override;
     ndk::ScopedAStatus getHwVolume(std::vector<float>* _aidl_return) override;
     ndk::ScopedAStatus setHwVolume(const std::vector<float>& in_channelVolumes) override;
 };

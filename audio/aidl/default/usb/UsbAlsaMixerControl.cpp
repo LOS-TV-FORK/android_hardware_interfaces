@@ -84,6 +84,15 @@ ndk::ScopedAStatus UsbAlsaMixerControl::setVolumes(int card, const std::vector<f
     return alsaMixer->setVolumes(volumes);
 }
 
+bool UsbAlsaMixerControl::hasHwVolumeControl(int card) {
+    auto alsaMixer = getAlsaMixer(card);
+    if (alsaMixer == nullptr) {
+        return false;
+    }
+    std::vector<float> volumes;
+    return alsaMixer->getVolumes(&volumes).isOk();
+}
+
 std::shared_ptr<alsa::Mixer> UsbAlsaMixerControl::getAlsaMixer(int card) {
     const std::lock_guard guard(mLock);
     const auto it = mMixerControls.find(card);

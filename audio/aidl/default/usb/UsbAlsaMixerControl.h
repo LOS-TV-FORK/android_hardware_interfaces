@@ -41,6 +41,9 @@ class UsbAlsaMixerControl {
     // The volume settings can be different on sound cards. It is controlled by streams.
     ndk::ScopedAStatus setVolumes(int card, const std::vector<float>& volumes);
 
+    // Returns true if the card exposes a hardware volume control usable by streams.
+    bool hasHwVolumeControl(int card);
+
   private:
     std::shared_ptr<alsa::Mixer> getAlsaMixer(int card);
     std::map<int, std::shared_ptr<alsa::Mixer>> getAlsaMixers();
